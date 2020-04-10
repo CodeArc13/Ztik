@@ -21,7 +21,7 @@ client.on('ready', () => {
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
   console.log(`${newPresence.user.username} ${newPresence.user.presence.status}`);
   var user = newPresence.user.username
-  if (user == 'Arc' || user == 'Muroidea') {
+  if (user == 'Arc' || user == 'Muroidea' || user == 'ArcsBotTester') {
     console.log(oldPresence.status);
     console.log(newPresence.user.presence.status);
     if (newPresence.user.presence.status == 'online') {
@@ -40,6 +40,4 @@ client.on('presenceUpdate', async (oldPresence, newPresence) => {
   };
 });
 // Arc online
-
-
 client.login(token);
