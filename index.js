@@ -8,7 +8,7 @@ const petNames = pets.petArray
 var userArray = ['Arc','Muroidea','ArcsBotTester','honswlos']
 //user == 'Arc' || user == 'Muroidea' || user == 'ArcsBotTester'
 
-async function getNewNick(newPresence, chatChannel) {
+async function getNewNick(newPresence) {
   var chatChannel = client.channels.cache.find(channel => channel.name === 'nerds-hangout')
   try { //catches error when user is server owner or higher role than bot
     var randomNumber = Math.floor(Math.random()*petNames.length);
@@ -17,7 +17,7 @@ async function getNewNick(newPresence, chatChannel) {
     chatChannel.send('Hehehe cackle cackle, someone just cast a new pet!... ' + newNick + ' appears!');
   } catch (e) {
     //console.error(e);
-  chatChannel.send('I am not worthy master.');
+    chatChannel.send('I am not worthy master.');
   } 
 } 
 
@@ -40,10 +40,8 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
   console.log(`${newPresence.user.username} ${newPresence.user.presence.status}`);
   var user = newPresence.user.username
   if (userArray.includes(user)) {
-    console.log(oldPresence.status);
-    console.log(newPresence.user.presence.status);
-    if (newPresence.user.presence.status == 'online') {
-      if (oldPresence.status == 'offline') {
+    if (newPresence.user.presence.status == 'online') { //these if statements check to see the user was comming from offline to online
+      if (oldPresence.status == 'undefined' || oldPresence.status == 'offline') {
         getNewNick(newPresence);
       };
     };
