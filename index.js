@@ -5,6 +5,8 @@ const client = new Discord.Client();
 const token = process.env.DISCORD_BOT_SECRET;
 const petNames = pets.petArray
 
+var userArray = ['Arc','Muroidea','ArcsBotTester']
+//user == 'Arc' || user == 'Muroidea' || user == 'ArcsBotTester'
 
 client.on('ready', () => {
   console.log('I\'m in');
@@ -21,7 +23,7 @@ client.on('ready', () => {
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
   console.log(`${newPresence.user.username} ${newPresence.user.presence.status}`);
   var user = newPresence.user.username
-  if (user == 'Arc' || user == 'Muroidea' || user == 'ArcsBotTester') {
+  if (userArray.includes(user)) {
     console.log(oldPresence.status);
     console.log(newPresence.user.presence.status);
     if (newPresence.user.presence.status == 'online') {
