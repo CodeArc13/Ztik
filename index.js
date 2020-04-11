@@ -8,15 +8,16 @@ const petNames = pets.petArray
 var userArray = ['Arc','Muroidea','ArcsBotTester','honswlos']
 //user == 'Arc' || user == 'Muroidea' || user == 'ArcsBotTester'
 
-async function getNewNick(newPresence) {
+async function getNewNick(newPresence, chatChannel) {
+  var chatChannel = client.channels.cache.find(channel => channel.name === 'nerds-hangout')
   try { //catches error when user is server owner or higher role than bot
     var randomNumber = Math.floor(Math.random()*petNames.length);
     var newNick = petNames[randomNumber]
     await newPresence.member.setNickname(newNick);
-    client.channels.cache.find(channel => channel.name === 'nerds-hangout').send('Hehehe cackle cackle, someone just cast a new pet!... ' + newNick + ' appears!');
+    chatChannel.send('Hehehe cackle cackle, someone just cast a new pet!... ' + newNick + ' appears!');
   } catch (e) {
     //console.error(e);
-  return client.channels.cache.find(channel => channel.name === 'nerds-hangout').send('I am not worthy master.');
+  chatChannel.send('I am not worthy master.');
   } 
 } 
 
