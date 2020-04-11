@@ -8,19 +8,34 @@ const petNames = pets.petArray
 var userArray = ['Arc','Muroidea','ArcsBotTester']
 //user == 'Arc' || user == 'Muroidea' || user == 'ArcsBotTester'
 
+async function getNewNick(newPresence) {
+  try { //catches error when user is server owner or higher role than bot
+    var randomNumber = Math.floor(Math.random()*petNames.length);
+    var newNick = petNames[randomNumber]
+    await newPresence.member.setNickname(newNick);
+    client.channels.cache.find(channel => channel.name === 'nerds-hangout').send('Hehehe cackle cackle, someone just cast a new pet!... ' + newNick + ' appears!');
+  } catch (e) {
+    //console.error(e);
+  return client.channels.cache.find(channel => channel.name === 'nerds-hangout').send('I am not worthy master.');
+  } 
+} 
+
 client.on('ready', () => {
   console.log('I\'m in');
   console.log(client.user.username);
 });
 
-//client.on('message', message => {
-//  if (message.content.includes('changeNick')) {
-//      if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return                   message.channel.send('I don\'t have permission to change your nickname!');
-//      message.member.setNickname(message.content.replace('changeNick ', ''));
-//  }
-//});
+/* prototype command code
+client.on('message', message => {
+  if (message.content.includes('changeNick')) {
+      if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return                   
+      message.channel.send('I don\'t have permission to change your nickname!');
+      message.member.setNickname(message.content.replace('changeNick ', ''));
+  }
+});
+*/
 
-client.on('presenceUpdate', async (oldPresence, newPresence) => {
+client.on('presenceUpdate', (oldPresence, newPresence) => {
   console.log(`${newPresence.user.username} ${newPresence.user.presence.status}`);
   var user = newPresence.user.username
   if (userArray.includes(user)) {
@@ -28,15 +43,7 @@ client.on('presenceUpdate', async (oldPresence, newPresence) => {
     console.log(newPresence.user.presence.status);
     if (newPresence.user.presence.status == 'online') {
       if (oldPresence.status == 'offline') {
-        try { //catches error when user is server owner or higher role than bot
-          var randomNumber = Math.floor(Math.random()*petNames.length);
-          var newNick = petNames[randomNumber]
-          await newPresence.member.setNickname(newNick);
-          client.channels.cache.find(channel => channel.name === 'nerds-hangout').send('Hehehe cackle cackle, someone just cast a new pet!... ' + newNick + ' appears!');
-        } catch (e) {
-          //console.error(e);
-          return client.channels.cache.find(channel => channel.name === 'nerds-hangout').send('I am not worthy master.');
-        }
+        getNewNick(newPresence);
       };
     };
   };
