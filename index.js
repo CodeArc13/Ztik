@@ -5,7 +5,7 @@ const client = new Discord.Client();
 const token = process.env.DISCORD_BOT_SECRET;
 const petNames = pets.petArray
 
-var userArray = ['Arc','Muroidea','ArcsBotTester']
+var userArray = ['Arc','Muroidea','ArcsBotTester', 'honswlos']
 //user == 'Arc' || user == 'Muroidea' || user == 'ArcsBotTester'
 
 async function getNewNick(newPresence) {
