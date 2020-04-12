@@ -1,3 +1,4 @@
+
 const Discord = require('discord.js');
 const keep_alive = require('./keep_alive.js')
 const pets = require('./pet_names.js')
@@ -41,7 +42,7 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
   var user = newPresence.user.username
   if (userArray.includes(user)) {
     if (newPresence.user.presence.status == 'online') { //these if statements check to see the user was comming from offline to online
-      if (oldPresence.status == 'undefined' || oldPresence.status == 'offline') {
+      if (typeof oldPresence.status === 'undefined' || oldPresence.status == 'offline') {
         getNewNick(newPresence);
       };
     };
