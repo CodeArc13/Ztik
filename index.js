@@ -42,11 +42,12 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
   var user = newPresence.user.username
   if (userArray.includes(user)) {
     if (newPresence.user.presence.status == 'online') { //these if statements check to see the user was comming from offline to online
-      if (typeof oldPresence.status === 'undefined' || oldPresence.status == 'offline') {
+      if (typeof oldPresence === 'undefined' || oldPresence.status == 'offline') {
         getNewNick(newPresence);
       };
     };
   };
 });
+
 // Arc online
 client.login(token);
