@@ -15,10 +15,10 @@ async function getNewNick(newPresence) {
     var randomNumber = Math.floor(Math.random()*petNames.length);
     var newNick = petNames[randomNumber]
     await newPresence.member.setNickname(newNick);
-    chatChannel.send('Hehehe cackle cackle, someone just cast a new pet!... ' + newNick + ' appears!');
+    //chatChannel.send('Hehehe cackle cackle, someone just cast a new pet!... ' + newNick + ' appears!');
   } catch (e) {
     //console.error(e);
-    chatChannel.send('I am not worthy master.');
+    //chatChannel.send('I am not worthy master.');
   } 
 } 
 
@@ -38,7 +38,7 @@ client.on('message', message => {
 */
 
 client.on('presenceUpdate', (oldPresence, newPresence) => {
-  console.log(`${newPresence.user.username} ${newPresence.user.presence.status}`);
+  //console.log(`${newPresence.user.username} ${newPresence.user.presence.status}`);
   var user = newPresence.user.username
   if (userArray.includes(user)) {
     if (newPresence.user.presence.status == 'online') { //these if statements check to see the user was comming from offline to online
